@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./Footer.module.css";
+import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 import { useLanguage } from "@/context/LanguageContext";
 import { footerData } from "@/data/footer";
@@ -14,34 +15,63 @@ export default function Footer() {
       <div className="container">
         <div className={styles.grid}>
           <div>
-            <h3>{footerData.title[language]}</h3>
-
+            <h3 className={styles.bigTitle}>{footerData.title[language]}</h3>
             <p>{footerData.description[language]}</p>
           </div>
 
           <div>
             <h4>{footerData.menuTitle[language]}</h4>
 
-            {navigation.map((item, index) => (
-              <a key={index} href={item.href}>
-                {item[language]}
-              </a>
-            ))}
+            <div className={styles.menuLinks}>
+              {navigation.map((item, index) => (
+                <a key={index} href={item.href}>
+                  {item[language]}
+                </a>
+              ))}
+            </div>
           </div>
 
           <div>
-            <h4>{footerData.contactTitle[language]}</h4>
+            <div className={styles.contactTop}>
+              <h4>{footerData.contactTitle[language]}</h4>
+            </div>
 
             <p>{footerData.address[language]}</p>
+            <p>
+              Telefon:
+              <a className={styles.phoneLink} href="tel:+903223652025">
+                0322 365 20 25
+              </a>
+            </p>
 
-            <p>Telefon: 0322 000 00 00</p>
+            <p>
+              E-posta: <br />
+              Adanatesisat_Dogalgaz_Gunesenerji_Esnafodasi@hotmail.com
+            </p>
 
-            <p>E-posta: info@ornekoda.org.tr</p>
+            <p>
+              E-posta: <br />
+              astdkgeieso@gmail.com
+            </p>
           </div>
         </div>
 
         <div className={styles.bottom}>
-          © 2026 {footerData.copyright[language]}
+          <p>© 2026 {footerData.copyright[language]}</p>
+
+          <div className={styles.bottomSocials}>
+            <a href="https://www.facebook.com/astdkgeieso/">
+              <FaFacebookF />
+            </a>
+
+            <a href="#">
+              <FaInstagram />
+            </a>
+
+            <a href="#">
+              <FaXTwitter />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

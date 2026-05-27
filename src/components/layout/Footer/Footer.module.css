@@ -1,48 +1,152 @@
 .footer {
   background: #062b6f;
   color: white;
-  padding: 55px 0 20px;
+  padding: 32px 0 12px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr;
-  gap: 40px;
+  grid-template-columns: 1.3fr 0.8fr 1.4fr;
+  gap: 38px;
 }
 
-.grid h3,
+.bigTitle {
+  white-space: pre-line;
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
 .grid h4 {
-  font-weight: 800;
-  margin-bottom: 18px;
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 600;
 }
 
 .grid p {
-  color: #d8e2f3;
-  line-height: 1.7;
-}
-
-.grid a {
-  display: block;
-  color: #d8e2f3;
-  text-decoration: none;
+  color: #d6e2ff;
+  line-height: 1.55;
+  font-size: 14px;
   margin-bottom: 10px;
+  font-weight: 400;
 }
 
-.grid a:hover {
-  color: white;
-}
-
-.bottom {
-  border-top: 1px solid rgba(255,255,255,0.2);
-  margin-top: 35px;
-  padding-top: 18px;
-  text-align: center;
-  color: #d8e2f3;
+.menuLinks a {
+  display: block;
+  color: #d6e2ff;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: 0.3s;
   font-size: 14px;
 }
 
+.menuLinks a:hover {
+  color: white;
+}
+
+.contactTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 8px;
+}
+
+.socialLinks a {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.socialLinks a:hover {
+  background: white;
+  color: #062b6f;
+}
+
+.phoneLink {
+  color: white;
+  text-decoration: none;
+  margin-left: 6px;
+}
+
+.phoneLink:hover {
+  text-decoration: underline;
+}
+
+.bottom {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  margin-top: 22px;
+  padding-top: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #d6e2ff;
+  font-size: 13px;
+}
+
+.bottomSocials {
+  display: flex;
+  gap: 10px;
+}
+
+.bottomSocials a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 16px;
+
+  transition: 0.3s;
+}
+
+.bottomSocials a:hover {
+  background: white;
+  color: #062b6f;
+}
+
 @media (max-width: 768px) {
+  .bottom {
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 992px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .bigTitle {
+    font-size: 18px;
+  }
+
+  .grid h4 {
+    font-size: 20px;
+  }
+
+  .contactTop {
+    justify-content: flex-start;
   }
 }
