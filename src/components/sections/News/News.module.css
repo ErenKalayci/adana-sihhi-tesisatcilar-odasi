@@ -67,3 +67,30 @@
   color: #555;
   line-height: 1.7;
 }
+
+@media (max-width: 768px) {
+  .news {
+    padding: 45px 0;
+  }
+
+  .top {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .top h2 {
+    font-size: 32px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image {
+    height: 240px;
+  }
+
+  .content h3 {
+    font-size: 22px;
+  }
+}

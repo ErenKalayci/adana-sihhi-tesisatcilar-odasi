@@ -112,3 +112,35 @@
   margin: 0;
   font-size: 14px;
 }
+
+@media (max-width: 768px) {
+  .homeIntro {
+    padding: 24px 0;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sliderBox {
+    min-height: 300px;
+    padding: 24px;
+  }
+
+  .sliderContent h1 {
+    font-size: 34px;
+    line-height: 1.15;
+  }
+
+  .sliderContent p {
+    font-size: 15px;
+  }
+
+  .sideBox {
+    padding: 24px;
+  }
+
+  .quickLinks {
+    grid-template-columns: 1fr;
+  }
+}
