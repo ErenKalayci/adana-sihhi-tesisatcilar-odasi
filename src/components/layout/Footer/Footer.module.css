@@ -1,0 +1,48 @@
+.footer {
+  background: #062b6f;
+  color: white;
+  padding: 55px 0 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 40px;
+}
+
+.grid h3,
+.grid h4 {
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.grid p {
+  color: #d8e2f3;
+  line-height: 1.7;
+}
+
+.grid a {
+  display: block;
+  color: #d8e2f3;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.grid a:hover {
+  color: white;
+}
+
+.bottom {
+  border-top: 1px solid rgba(255,255,255,0.2);
+  margin-top: 35px;
+  padding-top: 18px;
+  text-align: center;
+  color: #d8e2f3;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

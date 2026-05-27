@@ -1,0 +1,27 @@
+.pageHeader {
+  background:
+    linear-gradient(
+      rgba(6, 43, 111, 0.82),
+      rgba(6, 43, 111, 0.82)
+    ),
+    url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1600&auto=format&fit=crop")
+      center/cover no-repeat;
+
+  padding: 90px 0;
+  color: white;
+}
+
+.content {
+  text-align: center;
+}
+
+.content h1 {
+  font-size: 54px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.content p {
+  font-size: 18px;
+  color: #e2e8f0;
+}
