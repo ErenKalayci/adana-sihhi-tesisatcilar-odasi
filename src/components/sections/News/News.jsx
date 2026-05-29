@@ -1,21 +1,30 @@
 "use client";
+
+import Link from "next/link";
+
 import { useLanguage } from "@/context/LanguageContext";
 import styles from "./News.module.css";
 import { newsData, newsSectionData } from "@/data/news";
+
 export default function News() {
   const { language } = useLanguage();
+
   return (
     <section className={styles.news}>
       <div className="container">
         <div className={styles.top}>
           <h2>{newsSectionData.title[language]}</h2>
 
-          <a href="#">{newsSectionData.button[language]}</a>
+          <Link href="/haberler">{newsSectionData.button[language]}</Link>
         </div>
 
         <div className={styles.grid}>
           {newsData.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <Link
+              key={item.id}
+              href={`/haberler/${item.id}`}
+              className={styles.card}
+            >
               <div
                 className={styles.image}
                 style={{
@@ -30,7 +39,7 @@ export default function News() {
 
                 <p>{item.description[language]}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

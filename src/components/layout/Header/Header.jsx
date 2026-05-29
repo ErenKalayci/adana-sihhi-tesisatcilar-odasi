@@ -30,9 +30,19 @@ export default function Header() {
 
           <nav className={styles.navbar}>
             {navigation.map((item, index) => (
-              <a key={index} href={item.href}>
-                {item[language]}
-              </a>
+              <div key={index} className={styles.navItem}>
+                <a href={item.href}>{item[language]}</a>
+
+                {item.children && (
+                  <div className={styles.dropdown}>
+                    {item.children.map((child, childIndex) => (
+                      <a key={childIndex} href={child.href}>
+                        {child[language]}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
 
