@@ -1,13 +1,32 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { useLanguage } from "@/context/LanguageContext";
 import styles from "./News.module.css";
-import { newsData, newsSectionData } from "@/data/news";
+import { newsSectionData } from "@/data/news";
+import { supabase } from "@/lib/supabase";
 
 export default function News() {
   const { language } = useLanguage();
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    const getNews = async () => {
+      const { data, error } = await supabase
+        .from("news")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(3);
+
+      if (!error) {
+        setNews(data);
+      }
+    };
+
+    getNews();
+  }, []);
 
   return (
     <section className={styles.news}>
@@ -19,7 +38,7 @@ export default function News() {
         </div>
 
         <div className={styles.grid}>
-          {newsData.map((item) => (
+          {news.map((item) => (
             <Link
               key={item.id}
               href={`/haberler/${item.id}`}
@@ -28,16 +47,20 @@ export default function News() {
               <div
                 className={styles.image}
                 style={{
-                  backgroundImage: `url(${item.image})`,
+                  backgroundImage: `url(${
+                    item.image_url || "/images/news/default.jpg"
+                  })`,
                 }}
               ></div>
 
               <div className={styles.content}>
-                <span>{item.date}</span>
+                <span>
+                  {new Date(item.created_at).toLocaleDateString("tr-TR")}
+                </span>
 
-                <h3>{item.title[language]}</h3>
+                <h3>{item[`title_${language}`] || item.title_tr}</h3>
 
-                <p>{item.description[language]}</p>
+                <p>{item[`description_${language}`] || item.description_tr}</p>
               </div>
             </Link>
           ))}

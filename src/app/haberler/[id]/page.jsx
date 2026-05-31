@@ -1,8 +1,44 @@
-import Image from "next/image";
-import { newsData } from "@/data/news";
+"use client";
 
-export default function NewsDetailPage({ params }) {
-  const news = newsData.find((item) => item.id === Number(params.id));
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+
+import { supabase } from "@/lib/supabase";
+import { useLanguage } from "@/context/LanguageContext";
+
+export default function NewsDetailPage() {
+  const { id } = useParams();
+  const { language } = useLanguage();
+
+  const [news, setNews] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getNews = async () => {
+      const { data, error } = await supabase
+        .from("news")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (!error) {
+        setNews(data);
+      }
+
+      setLoading(false);
+    };
+
+    getNews();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <main className="container py-5">
+        <p>Yükleniyor...</p>
+      </main>
+    );
+  }
 
   if (!news) {
     return (
@@ -15,8 +51,8 @@ export default function NewsDetailPage({ params }) {
   return (
     <main className="container py-5">
       <Image
-        src={news.image}
-        alt={news.title.tr}
+        src={news.image_url || "/images/news/default.jpg"}
+        alt={news[`title_${language}`] || news.title_tr}
         width={1200}
         height={600}
         style={{
@@ -27,11 +63,23 @@ export default function NewsDetailPage({ params }) {
       />
 
       <div style={{ marginTop: "30px", maxWidth: "900px" }}>
-        <p style={{ color: "#b00000", fontWeight: "700" }}>{news.date}</p>
+        <p style={{ color: "#b00000", fontWeight: "700" }}>
+          {new Date(news.created_at).toLocaleDateString("tr-TR")}
+        </p>
 
-        <h1 style={{ color: "#062b6f", fontWeight: "800" }}>{news.title.tr}</h1>
+        <h1 style={{ color: "#062b6f", fontWeight: "800" }}>
+          {news[`title_${language}`] || news.title_tr}
+        </h1>
 
-        <p style={{ fontSize: "18px", lineHeight: "1.8" }}>{news.content.tr}</p>
+        <p
+          style={{
+            fontSize: "18px",
+            lineHeight: "1.8",
+            whiteSpace: "pre-line",
+          }}
+        >
+          {news[`content_${language}`] || news.content_tr}
+        </p>
       </div>
     </main>
   );

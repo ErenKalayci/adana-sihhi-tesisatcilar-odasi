@@ -1,13 +1,31 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { newsData, newsSectionData } from "@/data/news";
+import { newsSectionData } from "@/data/news";
 import PageHeader from "@/components/common/PageHeader/PageHeader";
+import { supabase } from "@/lib/supabase";
 
 export default function HaberlerPage() {
   const { language } = useLanguage();
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    const getNews = async () => {
+      const { data, error } = await supabase
+        .from("news")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (!error) {
+        setNews(data);
+      }
+    };
+
+    getNews();
+  }, []);
 
   return (
     <>
@@ -18,7 +36,7 @@ export default function HaberlerPage() {
 
       <main className="container py-5">
         <div className="row g-4">
-          {newsData.map((item) => (
+          {news.map((item) => (
             <div className="col-lg-4 col-md-6" key={item.id}>
               <Link
                 href={`/haberler/${item.id}`}
@@ -29,8 +47,8 @@ export default function HaberlerPage() {
               >
                 <div className="card h-100 shadow-sm border-0">
                   <img
-                    src={item.image}
-                    alt={item.title[language]}
+                    src={item.image_url || "/images/news/default.jpg"}
+                    alt={item[`title_${language}`] || item.title_tr}
                     className="card-img-top"
                     style={{
                       height: "230px",
@@ -46,7 +64,7 @@ export default function HaberlerPage() {
                         fontSize: "14px",
                       }}
                     >
-                      {item.date}
+                      {new Date(item.created_at).toLocaleDateString("tr-TR")}
                     </span>
 
                     <h3
@@ -57,11 +75,11 @@ export default function HaberlerPage() {
                         marginTop: "12px",
                       }}
                     >
-                      {item.title[language]}
+                      {item[`title_${language}`] || item.title_tr}
                     </h3>
 
                     <p style={{ color: "#555" }}>
-                      {item.description[language]}
+                      {item[`description_${language}`] || item.description_tr}
                     </p>
                   </div>
                 </div>
