@@ -60,6 +60,7 @@ export default function NewsDetailPage() {
           height: "420px",
           objectFit: "cover",
         }}
+        priority
       />
 
       <div style={{ marginTop: "30px", maxWidth: "900px" }}>
